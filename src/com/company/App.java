@@ -51,7 +51,7 @@ public class App
         System.out.println("-\"line_detect\" creates a new image outlining the edges of the picture inputted\n");
     }
 
-    //Constructs objects and makes method calls to process the images
+    //Parses the next line and isolates the command and the image
     private static void parseLine(String nextLine) throws IOException
     {
         //System.out.println(nextCommand);
@@ -89,7 +89,19 @@ public class App
         processTasks(command,img);
     }
 
+    //Constructs objects and calls methods to process the specified images
     private static void processTasks(String command, BufferedImage img)
     {
+        switch(command) //when the methods are completed, fill in blanks of switch case
+        {
+            case "grayscale_to_rgb":return;
+            case "rgb_to_grayscale":return;
+            case "rgb_deepfry":return;
+            case "grayscale_deepfry":return;
+            case "invert":return;
+            case "blur":return;
+            case "line_detect":return;
+            default: return;
+        }
     }
 }
