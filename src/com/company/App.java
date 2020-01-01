@@ -10,7 +10,7 @@ public class App
 {
     public static final String[] features = new String[]{"grayscale_to_rgb","rgb_to_grayscale","grayscale_deepfry","rgb_deepfry","invert","blur","line_detect"};
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
         welcome();
         Scanner scan = new Scanner(System.in);
@@ -18,22 +18,27 @@ public class App
         new Thread(() -> {
             boolean shouldContinue = true;
 
-            do {
+            while(shouldContinue)
+            {
                 String nextCommand = scan.nextLine();
                 if (nextCommand.equals("help")) displayFeatures(); //if person wants help
                 else if (nextCommand.equals("end")) shouldContinue=false; //if person wants to end program
                 else
                 {
-                    processTasks(nextCommand);
+                    try {
+                        parseLine(nextCommand);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            } while(shouldContinue);
+            }
         }).start();
     }
 
     //Displays welcome text at start of program
     private static void welcome()
     {
-        System.out.println("\nTo use this, enter the name of the feature you would like followed by the directory of the image you would like to transform.");
+        System.out.println("\nTo use this, enter the name of the feature you would like followed by the directory of the image you would like to transform: [command] [directory]");
         System.out.println("-To see a full list of features, type \"help\" \n-To end the program, type \"end\"\n");
     }
 
@@ -41,26 +46,50 @@ public class App
     private static void displayFeatures()
     {
         System.out.println("Features: " + Arrays.toString(features));
-        System.out.println("\"grayscale_to_rgb\" and vice-versa, and \"rgb_deepfry\" and vice versa, are self-explanatory");
+        System.out.println("-\"grayscale_to_rgb\" and vice-versa, and \"rgb_deepfry\" and vice versa, are self-explanatory");
         System.out.println("-\"blur\" blurs an image. Can do multiple times to make picture very blurry");
         System.out.println("-\"line_detect\" creates a new image outlining the edges of the picture inputted\n");
     }
 
     //Constructs objects and makes method calls to process the images
-    private static void processTasks(String nextLine) throws IOException
+    private static void parseLine(String nextLine) throws IOException
     {
         //System.out.println(nextCommand);
         String[] commandAndDir = nextLine.split(" "); //command is meant to be 2 " " separated tokens
+
+        if (commandAndDir.length == 1) //there was no space, only 1 token
+        {
+            System.out.println("Please enter a command followed by the directory of the image: [command] [directory]");
+            return;
+        }
         var command = commandAndDir[0];
         var directory = commandAndDir[1];
-        if (command.equals(directory)) //there was no space, only 1 token
+
+        if (Arrays.binarySearch(features,command) > -1) //if command is not in the array aka not supported by the app
         {
-            System.out.println("Please enter a command followed by the directory of the image");
-        } else if (Arrays.binarySearch(features,command) > -1) //if command is not in the array aka not supported by the app
-        {
-            System.out.println("Please enter a valid command.");
+            System.out.println("Please enter a valid command: [command] [directory]");
+            return;
         }
 
         //there are now two tokens, and the command is valid
+
+        File folderInput = new File(directory);
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(folderInput);
+        } catch (IOException e){
+            System.out.println("Please make sure that the directory you specified contains an image.");
+            System.out.println("Common tips: \n-Make sure you use \"//\" instead of \"\\\" in the directory");
+            System.out.println("-Make sure you include the postfix (.png, .jpeg)");
+            System.out.println("-Make sure you actually include the name of the file");
+            return;
+        }
+        //System.out.println(folderInput + " command successful");
+
+        processTasks(command,img);
+    }
+
+    private static void processTasks(String command, BufferedImage img)
+    {
     }
 }
