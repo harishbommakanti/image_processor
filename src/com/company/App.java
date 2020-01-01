@@ -1,5 +1,9 @@
 package com.company;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class App
@@ -29,7 +33,7 @@ public class App
     //Displays welcome text at start of program
     private static void welcome()
     {
-        System.out.println("\nTo use this, enter the name of the feature you would like followed by the path of the image you would like to transform.");
+        System.out.println("\nTo use this, enter the name of the feature you would like followed by the directory of the image you would like to transform.");
         System.out.println("-To see a full list of features, type \"help\" \n-To end the program, type \"end\"\n");
     }
 
@@ -43,8 +47,20 @@ public class App
     }
 
     //Constructs objects and makes method calls to process the images
-    private static void processTasks(String nextLine)
+    private static void processTasks(String nextLine) throws IOException
     {
         //System.out.println(nextCommand);
+        String[] commandAndDir = nextLine.split(" "); //command is meant to be 2 " " separated tokens
+        var command = commandAndDir[0];
+        var directory = commandAndDir[1];
+        if (command.equals(directory)) //there was no space, only 1 token
+        {
+            System.out.println("Please enter a command followed by the directory of the image");
+        } else if (Arrays.binarySearch(features,command) > -1) //if command is not in the array aka not supported by the app
+        {
+            System.out.println("Please enter a valid command.");
+        }
+
+        //there are now two tokens, and the command is valid
     }
 }
