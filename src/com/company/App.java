@@ -10,13 +10,22 @@ public class App
     {
         welcome();
         Scanner scan = new Scanner(System.in);
-        if (scan.nextLine().equals("help")) displayFeatures();
+        new Thread() {
+            public void run() {
+                boolean shouldContinue = true;
+                do {
+                    String nextCommand = scan.nextLine();
+                    if (nextCommand.equals("help")) displayFeatures();
+                    if (nextCommand.equals("end")) shouldContinue=false;
+                } while(shouldContinue);
+            }
+        }.start();
     }
 
     private static void welcome()
     {
         System.out.println("To use this, enter the name of the feature you would like followed by the path of the image you would like to transform.");
-        System.out.println("To see a full list of features, type \"help\"");
+        System.out.println("-To see a full list of features, type \"help\" \n-To end the program, type \"end\"");
     }
 
     private static void displayFeatures()
