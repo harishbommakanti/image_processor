@@ -97,7 +97,11 @@ public class App
         switch(command) //when the methods are completed, fill in blanks of switch case
         {
             case "grayscale_to_rgb": return;
-            case "rgb_to_grayscale":return;
+            case "rgb_to_grayscale":
+            {
+                Grayscale_Stuff g = new Grayscale_Stuff(command,img);
+                g.rgb_to_grayscale();
+            } return;
             case "rgb_deepfry":return;
             case "grayscale_deepfry":return;
             case "invert":return;

@@ -47,8 +47,10 @@ public class Grayscale_Stuff
 
         File newFile = new File("images/rgb_to_grayscale");
         try{
-            ImageIO.write(transformed,"jpg",newFile);
-        } catch(Exception yeet){}
+            ImageIO.write(transformed,"jpeg",newFile);
+        } catch(Exception yeet){
+            System.out.println(yeet);
+        }
         System.out.println("rgb_to_grayscale transformation successful! Check the images folder for a \"rgb_to_grayscale\" image\n");
     }
 
