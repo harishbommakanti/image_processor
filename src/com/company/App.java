@@ -38,7 +38,8 @@ public class App
     //Displays welcome text at start of program
     private static void welcome()
     {
-        System.out.println("\nTo use this, enter the name of the feature you would like followed by the directory of the image you would like to transform: [command] [directory]");
+        System.out.println("\nTo use this, enter the name of the feature you would like followed by the directory of the image you would like to transform: [command] [directory]\n+" +
+                "The image should be in the \"images\" directory, and the directory should be similar to \"images/{img.jpeg}\"");
         System.out.println("-To see a full list of features, type \"help\" \n-To end the program, type \"end\"\n");
     }
 
@@ -74,14 +75,15 @@ public class App
         //there are now two tokens, and the command is valid
 
         File folderInput = new File(directory);
+
         BufferedImage img = null;
         try {
             img = ImageIO.read(folderInput);
         } catch (IOException e){
-            System.out.println("Please make sure that the directory you specified contains an image.");
-            System.out.println("Common tips: \n-Make sure you use \"//\" instead of \"\\\" in the directory");
+            System.out.println("Specified file does not exist");
+            System.out.println("Common tips:");
             System.out.println("-Make sure you include the postfix (.png, .jpeg)");
-            System.out.println("-Make sure you actually include the name of the file");
+            System.out.println("-Make sure you actually include the name of the file in the following format: \"images\"");
             return;
         }
         //System.out.println(folderInput + " command successful");
