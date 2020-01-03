@@ -66,7 +66,7 @@ public class App
         var command = commandAndDir[0];
         var directory = commandAndDir[1];
 
-        if (Arrays.binarySearch(features,command) > -1) //if command is not in the array aka not supported by the app
+        if (Arrays.binarySearch(features,command) == -1) //if command is not in the array aka not supported by the app
         {
             System.out.println("Please enter a valid command: [command] [directory]");
             return;
@@ -96,7 +96,11 @@ public class App
     {
         switch(command) //when the methods are completed, fill in blanks of switch case
         {
-            case "grayscale_to_rgb": return;
+            /*case "grayscale_to_rgb": --> don't think this can actually be done
+            {
+                Grayscale_Stuff g = new Grayscale_Stuff(command,img);
+                g.grayscale_to_rgb();
+            } return;*/
             case "rgb_to_grayscale":
             {
                 Grayscale_Stuff g = new Grayscale_Stuff(command,img);

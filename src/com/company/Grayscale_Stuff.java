@@ -21,8 +21,10 @@ public class Grayscale_Stuff
         this.img = img;
         height = this.img.getHeight();
         width = this.img.getWidth();
+        transformed = img;
     }
 
+    /* Don't think this can actually be done
     //will process a grayscale picture and write a rgb picture to the images folder
     public static void grayscale_to_rgb()
     {
@@ -30,9 +32,16 @@ public class Grayscale_Stuff
         {
             for (int w = 0; w < width; w++)
             {
-                int rgb_total = img.getRGB(w,h);
-                Color newPixelColor = new Color(rgb_total,rgb_total,rgb_total);
-                transformed.setRGB(w,h,newPixelColor.getRGB());
+                Color rgb_total = new Color(img.getRGB(w,h));
+                int preRGB = rgb_total.getRed(); //gray so red=blue=green;
+                //.3red + .11green + .59blue = preRGB
+
+                System.out.println("r: " + r);
+                System.out.println("g: " + g);
+                System.out.println("b: " + b);
+                System.out.println("gray: " + gray);
+                Color newColor = new Color(gray,gray,gray);
+                transformed.setRGB(w, h, newColor.getRGB());
             }
         }
 
@@ -44,7 +53,7 @@ public class Grayscale_Stuff
         }
 
         System.out.println("grayscale_to_rgb transformation successful! Check the images folder for a \"grayscale_to_rgb\" image\n");
-    }
+    }*/
 
     //will process a rgb pic and return a grayscale image to the images folder
     public static void rgb_to_grayscale()
