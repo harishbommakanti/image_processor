@@ -5,8 +5,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-//will process and return images with commands: "grayscale_to_rgb","rgb_to_grayscale","grayscale_deepfry"
-public class Grayscale_Stuff
+//will process incoming images and write results to the images folder
+public class Image_Transformations
 {
     private static String command = null;
     private static BufferedImage img = null;
@@ -15,7 +15,7 @@ public class Grayscale_Stuff
     private static int width = 0;
     private static BufferedImage transformed = null;
 
-    public Grayscale_Stuff(String command, BufferedImage img)
+    public Image_Transformations(String command, BufferedImage img)
     {
         this.command = command;
         this.img = img;
@@ -23,37 +23,6 @@ public class Grayscale_Stuff
         width = this.img.getWidth();
         transformed = img;
     }
-
-    /* Don't think this can actually be done
-    //will process a grayscale picture and write a rgb picture to the images folder
-    public static void grayscale_to_rgb()
-    {
-        for (int h = 0; h < height; h++)
-        {
-            for (int w = 0; w < width; w++)
-            {
-                Color rgb_total = new Color(img.getRGB(w,h));
-                int preRGB = rgb_total.getRed(); //gray so red=blue=green;
-                //.3red + .11green + .59blue = preRGB
-
-                System.out.println("r: " + r);
-                System.out.println("g: " + g);
-                System.out.println("b: " + b);
-                System.out.println("gray: " + gray);
-                Color newColor = new Color(gray,gray,gray);
-                transformed.setRGB(w, h, newColor.getRGB());
-            }
-        }
-
-        File newFile = new File("images/grayscale_to_rgb");
-        try{
-            ImageIO.write(transformed,"jpeg",newFile);
-        } catch(Exception yeet){
-            System.out.println(yeet);
-        }
-
-        System.out.println("grayscale_to_rgb transformation successful! Check the images folder for a \"grayscale_to_rgb\" image\n");
-    }*/
 
     //will process a rgb pic and return a grayscale image to the images folder
     public static void rgb_to_grayscale()
@@ -81,9 +50,35 @@ public class Grayscale_Stuff
         System.out.println("rgb_to_grayscale transformation successful! Check the images folder for a \"rgb_to_grayscale\" image\n");
     }
 
-    //will deepfry a gray scale image
-    public static void grayscale_deepfry()
+    public static void rgb_filters()
     {
+        BufferedImage redFilter = img,greenFilter=img,blueFilter = img;
 
+        for (int h = 0; h < height; h++)
+        {
+            for (int w = 0; w < width; w++)
+            {
+                Color preRgb = new Color(img.getRGB(w,h));
+                int r = preRgb.getRed();
+                int g = preRgb.getGreen();
+                int b = preRgb.getBlue();
+
+                redFilter.setRGB(w,h,new Color(r,0,0).getRGB());
+                greenFilter.setRGB(w,h,new Color(0,g,0).getRGB());
+                blueFilter.setRGB(w,h,new Color(0,0,b).getRGB());
+            }
+        }
+
+        File newRed = new File("images/redFilter");
+        File newGreen = new File("images/greenFilter");
+        File newBlue = new File("images/blueFilter");
+        try{
+            ImageIO.write(redFilter,"jpeg",newRed);
+            ImageIO.write(greenFilter,"jpeg",newGreen);
+            ImageIO.write(blueFilter,"jpeg",newBlue);
+        } catch(Exception yeet){
+            System.out.println(yeet);
+        }
+        System.out.println("rgb_filters transformations successful! Check the images folder for a \"red_filter\", a \"green_filter\", and a \"blue filter\" image\n");
     }
 }

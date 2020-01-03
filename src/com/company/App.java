@@ -8,7 +8,8 @@ import java.util.*;
 
 public class App
 {
-    public static final String[] features = new String[]{"grayscale_to_rgb","rgb_to_grayscale","grayscale_deepfry","rgb_deepfry","invert","blur","line_detect"};
+    public static final String[] features = {"rgb_to_grayscale","rgb_deepfry","invert","blur","edge_detect",
+    "rgb_filters","glass_filter","wave_filter"};
 
     public static void main(String[] args) throws IOException
     {
@@ -94,23 +95,22 @@ public class App
     //Constructs objects and calls methods to process the specified images
     private static void processTasks(String command, BufferedImage img)
     {
+        Image_Transformations i = new Image_Transformations(command,img);
+
         switch(command) //when the methods are completed, fill in blanks of switch case
         {
-            /*case "grayscale_to_rgb": --> don't think this can actually be done
-            {
-                Grayscale_Stuff g = new Grayscale_Stuff(command,img);
-                g.grayscale_to_rgb();
-            } return;*/
             case "rgb_to_grayscale":
             {
-                Grayscale_Stuff g = new Grayscale_Stuff(command,img);
-                g.rgb_to_grayscale();
+                i.rgb_to_grayscale();
             } return;
             case "rgb_deepfry":return;
-            case "grayscale_deepfry":return;
             case "invert":return;
             case "blur":return;
-            case "line_detect":return;
+            case "edge_detect":return;
+            case "rgb_filters":
+            {
+                i.rgb_filters();
+            } return;
             default: return;
         }
     }
