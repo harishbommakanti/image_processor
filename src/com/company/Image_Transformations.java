@@ -52,9 +52,9 @@ public class Image_Transformations
 
     public static void rgb_filters()
     {
-        BufferedImage redFilter = img;
-        BufferedImage greenFilter=img;
-        BufferedImage blueFilter = img;
+        BufferedImage redFilter = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        BufferedImage greenFilter = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        BufferedImage blueFilter = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
         for (int h = 0; h < height; h++)
         {
@@ -65,9 +65,9 @@ public class Image_Transformations
                 int g = preRgb.getGreen();
                 int b = preRgb.getBlue();
 
+                blueFilter.setRGB(w,h,new Color(0,0,b).getRGB());
                 redFilter.setRGB(w,h,new Color(r,0,0).getRGB());
                 greenFilter.setRGB(w,h,new Color(0,g,0).getRGB());
-                blueFilter.setRGB(w,h,new Color(0,0,b).getRGB());
             }
         }
 
@@ -75,9 +75,9 @@ public class Image_Transformations
         File newGreen = new File("images/greenFilter");
         File newBlue = new File("images/blueFilter");
         try{
-            ImageIO.write(redFilter,"jpeg",newRed);
             ImageIO.write(greenFilter,"jpeg",newGreen);
             ImageIO.write(blueFilter,"jpeg",newBlue);
+            ImageIO.write(redFilter,"jpeg",newRed);
         } catch(Exception yeet){
             System.out.println(yeet);
         }
