@@ -11,3 +11,5 @@ out/
 *redFilter
 *blueFilter
 *greenFilter
+*invert
+*rgb_deepfry

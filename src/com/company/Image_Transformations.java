@@ -3,6 +3,7 @@ package com.company;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.LookupOp;
 import java.io.File;
 
 //will process incoming images and write results to the images folder
@@ -99,7 +100,9 @@ public class Image_Transformations
     //deepfries an rgb image
     public static void rgb_deepfry()
     {
-        
+
+        /*writeToFile("rgb_deepfry",transformed);
+        System.out.println("rgb_deepfry successfull. Check the images folder for a \"rgb_deepfry\" image"); */
     }
 
     //following should be in a diff branch for changing 'shapes': blurring, edge_detect, glass_filter, wave_filter

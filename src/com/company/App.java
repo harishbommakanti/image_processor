@@ -9,7 +9,7 @@ import java.util.*;
 public class App
 {
     public static final String[] features = {"rgb_to_grayscale","rgb_deepfry","invert","blur","edge_detect",
-    "rgb_filters","glass_filter","wave_filter"};
+    "rgb_filters","glass_filter","wave_filter", "add_noise"};
 
     public static void main(String[] args) throws IOException
     {
@@ -105,6 +105,9 @@ public class App
             case "blur":return;
             case "edge_detect":return;
             case "rgb_filters": i.rgb_filters();return;
+            case "glass_filter":;return;
+            case "wave_filter":;return;
+            case "add_noise":;return;
             default: return;
         }
     }
