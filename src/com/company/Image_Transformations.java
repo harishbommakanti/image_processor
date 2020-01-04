@@ -52,7 +52,9 @@ public class Image_Transformations
 
     public static void rgb_filters()
     {
-        BufferedImage redFilter = img,greenFilter=img,blueFilter = img;
+        BufferedImage redFilter = img;
+        BufferedImage greenFilter=img;
+        BufferedImage blueFilter = img;
 
         for (int h = 0; h < height; h++)
         {

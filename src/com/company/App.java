@@ -83,7 +83,7 @@ public class App
         } catch (IOException e){
             System.out.println("Specified file does not exist");
             System.out.println("Common tips:");
-            System.out.println("-Make sure you include the postfix (.png, .jpeg)");
+            System.out.println("-Make sure you include the CORRECT postfix (.png, .jpeg)");
             System.out.println("-Make sure you actually include the name of the file in the following format: \"images\"");
             return;
         }
@@ -99,18 +99,12 @@ public class App
 
         switch(command) //when the methods are completed, fill in blanks of switch case
         {
-            case "rgb_to_grayscale":
-            {
-                i.rgb_to_grayscale();
-            } return;
+            case "rgb_to_grayscale": i.rgb_to_grayscale();return;
             case "rgb_deepfry":return;
             case "invert":return;
             case "blur":return;
             case "edge_detect":return;
-            case "rgb_filters":
-            {
-                i.rgb_filters();
-            } return;
+            case "rgb_filters": i.rgb_filters();return;
             default: return;
         }
     }

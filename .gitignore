@@ -8,3 +8,6 @@ out/
 
 #images that appear
 *rgb_to_grayscale
+*redFilter
+*blueFilter
+*greenFilter
