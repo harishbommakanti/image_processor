@@ -100,8 +100,8 @@ public class App
         switch(command) //when the methods are completed, fill in blanks of switch case
         {
             case "rgb_to_grayscale": i.rgb_to_grayscale();return;
-            case "rgb_deepfry":return;
-            case "invert":return;
+            case "rgb_deepfry":i.rgb_deepfry();return;
+            case "invert":i.invert();return;
             case "blur":return;
             case "edge_detect":return;
             case "rgb_filters": i.rgb_filters();return;

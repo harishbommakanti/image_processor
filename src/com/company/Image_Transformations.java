@@ -41,12 +41,8 @@ public class Image_Transformations
             }
         }
 
-        File newFile = new File("images/rgb_to_grayscale");
-        try{
-            ImageIO.write(transformed,"jpeg",newFile);
-        } catch(Exception yeet){
-            System.out.println(yeet);
-        }
+        writeToFile("rgb_to_grayscale",transformed);
+
         System.out.println("rgb_to_grayscale transformation successful! Check the images folder for a \"rgb_to_grayscale\" image\n");
     }
 
@@ -71,16 +67,50 @@ public class Image_Transformations
             }
         }
 
-        File newRed = new File("images/redFilter");
-        File newGreen = new File("images/greenFilter");
-        File newBlue = new File("images/blueFilter");
+        writeToFile("redFilter",redFilter);
+        writeToFile("greenFilter",greenFilter);
+        writeToFile("blueFilter",blueFilter);
+
+        System.out.println("rgb_filters transformations successful! Check the images folder for a \"red_filter\", a \"green_filter\", and a \"blue filter\" image\n");
+    }
+
+    //inverts an image
+    public static void invert()
+    {
+        for (int h = 0; h < height; h++)
+        {
+            for (int w = 0; w < width; w++)
+            {
+                Color preRGB = new Color(img.getRGB(w,h));
+                int R = 255-preRGB.getRed();
+                int G = 255-preRGB.getGreen();
+                int B = 255-preRGB.getBlue();
+
+                Color postRGB = new Color(R,G,B);
+                transformed.setRGB(w,h,postRGB.getRGB());
+            }
+        }
+
+        writeToFile("invert",transformed);
+
+        System.out.println("invert transformation successful! Check the images folder for a \"invert\" image\n");
+    }
+
+    //deepfries an rgb image
+    public static void rgb_deepfry()
+    {
+        
+    }
+
+    //following should be in a diff branch for changing 'shapes': blurring, edge_detect, glass_filter, wave_filter
+
+    private static void writeToFile(String fileName, BufferedImage transformed)
+    {
+        File newFile = new File("images/"+fileName);
         try{
-            ImageIO.write(greenFilter,"jpeg",newGreen);
-            ImageIO.write(blueFilter,"jpeg",newBlue);
-            ImageIO.write(redFilter,"jpeg",newRed);
+            ImageIO.write(transformed,"jpeg",newFile);
         } catch(Exception yeet){
             System.out.println(yeet);
         }
-        System.out.println("rgb_filters transformations successful! Check the images folder for a \"red_filter\", a \"green_filter\", and a \"blue filter\" image\n");
     }
 }
