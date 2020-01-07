@@ -105,7 +105,7 @@ public class App
             case "blur":return;
             case "edge_detect":return;
             case "rgb_filters": i.rgb_filters();return;
-            case "glass_filter":;return;
+            case "glass_filter":i.glassFilter();return;
             case "wave_filter":;return;
             case "add_noise":;return;
             default: return;

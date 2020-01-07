@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.LookupOp;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
 
 //will process incoming images and write results to the images folder
 public class Image_Transformations
@@ -106,10 +108,45 @@ public class Image_Transformations
     }
 
     //following should be in a diff branch for changing 'shapes': blurring, edge_detect, glass_filter, wave_filter
+    public static void glassFilter()
+    {
+        for (int h = 0; h < height; h++)
+        {
+            for (int w = 0; w < width; w++)
+            {
+                //picking a random w and h that is at most 5 away from curr location
+                int randW = pickRandom(w,width);
+                int randH = pickRandom(h,height);
+                int randColor = img.getRGB(randW,randH);
+
+                /*System.out.println("w: " + w + "   h: " + h + "    width: " + width + "    height: " + height);
+                System.out.println("randW: " + randW);
+                System.out.println("randH: " + randH); */
+                transformed.setRGB(w,h,randColor);
+            }
+        }
+
+        writeToFile("glass_filter",transformed);
+        System.out.println("glass_filter transformation successful! Check the images folder for a \"glass_filter\" image");
+    }
+
+    //returns a random int that is at most 5 away from the param, and within the bounds
+    private static int pickRandom(int param, int bound)
+    {
+        //bounds are 0 to bound
+        ArrayList<Integer> possibleValues = new ArrayList();
+        for (int i = param-5; i<=param && i>=0; i++) //adding possible values for 5 lower
+            possibleValues.add(i);
+        for (int i = param+5; i>=param && i<=bound-1; i--) //adding possible values for 5 upper
+            possibleValues.add(i);
+
+        Random r = new Random();
+        return possibleValues.get(r.nextInt(possibleValues.size()));
+    }
 
     private static void writeToFile(String fileName, BufferedImage transformed)
     {
-        File newFile = new File("images/"+fileName);
+        File newFile = new File("images/"+fileName+".jpeg");
         try{
             ImageIO.write(transformed,"jpeg",newFile);
         } catch(Exception yeet){

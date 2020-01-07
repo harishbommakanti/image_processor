@@ -6,10 +6,11 @@ out/
 #Java .class files
 *.class
 
-#images that appear
-*rgb_to_grayscale
-*redFilter
-*blueFilter
-*greenFilter
-*invert
-*rgb_deepfry
+#output images
+*rgb_to_grayscale.jpeg
+*redFilter.jpeg
+*blueFilter.jpeg
+*greenFilter.jpeg
+*invert.jpeg
+*rgb_deepfry.jpeg
+*glass_filter.jpeg
