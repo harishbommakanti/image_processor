@@ -130,6 +130,7 @@ public class Image_Transformations
         System.out.println("glass_filter transformation successful! Check the images folder for a \"glass_filter\" image");
     }
 
+    //adds 'noise' to a pic
     public static void addNoise()
     {
         for (int h = 0; h < height; h++)
@@ -153,6 +154,23 @@ public class Image_Transformations
 
         writeToFile("add_noise",transformed);
         System.out.println("add_noise transformation completed! Check out the images folder for a \"add_noise\" image");
+    }
+
+    public static void wave_filter()
+    {
+        for (int h = 0; h < height; h++)
+        {
+            for (int w = 0; w < width; w++)
+            {
+                int newH = h + (int)(20*Math.sin(Math.PI*h/32));
+                int postColor = img.getRGB(w,newH);
+
+                    transformed.setRGB(w,h,postColor);
+            }
+        }
+
+        writeToFile("wave_filter",transformed);
+        System.out.println("wave_filter transformation successful! Check the images folder for a \"wave_filter\" image");
     }
 
     //returns a random int that is at most radius away from the param, and within the bounds
