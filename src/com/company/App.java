@@ -9,7 +9,7 @@ import java.util.*;
 public class App
 {
     public static final String[] features = {"rgb_to_grayscale","rgb_deepfry","invert","blur","edge_detect",
-    "rgb_filters","glass_filter","wave_filter", "add_noise"};
+            "rgb_filters","glass_filter","wave_filter", "add_noise"};
 
     public static void main(String[] args) throws IOException
     {
@@ -67,7 +67,8 @@ public class App
         var command = commandAndDir[0];
         var directory = commandAndDir[1];
 
-        if (Arrays.binarySearch(features,command) == -1) //if command is not in the array aka not supported by the app
+        Arrays.sort(features);
+        if (Arrays.binarySearch(features,command) < 0) //if command is not in the array aka not supported by the app
         {
             System.out.println("Please enter a valid command: [command] [directory]");
             return;
@@ -107,7 +108,7 @@ public class App
             case "rgb_filters": i.rgb_filters();return;
             case "glass_filter":i.glassFilter();return;
             case "wave_filter":;return;
-            case "add_noise":;return;
+            case "add_noise":i.addNoise();return;
             default: return;
         }
     }

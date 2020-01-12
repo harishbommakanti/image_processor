@@ -115,8 +115,8 @@ public class Image_Transformations
             for (int w = 0; w < width; w++)
             {
                 //picking a random w and h that is at most 5 away from curr location
-                int randW = pickRandom(w,width);
-                int randH = pickRandom(h,height);
+                int randW = pickRandom(w,width,5);
+                int randH = pickRandom(h,height,5);
                 int randColor = img.getRGB(randW,randH);
 
                 /*System.out.println("w: " + w + "   h: " + h + "    width: " + width + "    height: " + height);
@@ -130,14 +130,39 @@ public class Image_Transformations
         System.out.println("glass_filter transformation successful! Check the images folder for a \"glass_filter\" image");
     }
 
-    //returns a random int that is at most 5 away from the param, and within the bounds
-    private static int pickRandom(int param, int bound)
+    public static void addNoise()
+    {
+        for (int h = 0; h < height; h++)
+        {
+            for (int w = 0; w < width; w++)
+            {
+                int randW = pickRandom(w,width,10);
+                int randH = pickRandom(h,height,10);
+
+                Color randColor = null;
+                switch((int)(Math.random()*4))
+                {
+                    case 0: randColor = Color.BLACK;
+                    case 1: randColor = Color.GRAY;
+                    case 2: randColor = Color.LIGHT_GRAY;
+                    case 3: randColor = Color.DARK_GRAY;
+                }
+                transformed.setRGB(randW,randH,randColor.getRGB());
+            }
+        }
+
+        writeToFile("add_noise",transformed);
+        System.out.println("add_noise transformation completed! Check out the images folder for a \"add_noise\" image");
+    }
+
+    //returns a random int that is at most radius away from the param, and within the bounds
+    private static int pickRandom(int param, int bound, int radius)
     {
         //bounds are 0 to bound
         ArrayList<Integer> possibleValues = new ArrayList();
-        for (int i = param-5; i<=param && i>=0; i++) //adding possible values for 5 lower
+        for (int i = param-radius; i<=param && i>=0; i++) //adding possible values for 5 lower
             possibleValues.add(i);
-        for (int i = param+5; i>=param && i<=bound-1; i--) //adding possible values for 5 upper
+        for (int i = param+radius; i>=param && i<=bound-1; i--) //adding possible values for 5 upper
             possibleValues.add(i);
 
         Random r = new Random();
